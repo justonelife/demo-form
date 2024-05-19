@@ -8,16 +8,26 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/the-form",
         "index": "apps/the-form/src/index.html",
         "main": "apps/the-form/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/the-form/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/the-form/src/favicon.ico", "apps/the-form/src/assets"],
-        "styles": ["apps/the-form/src/styles.scss"],
+        "assets": [
+          "apps/the-form/src/favicon.ico",
+          "apps/the-form/src/assets"
+        ],
+        "styles": [
+          "@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/the-form/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -70,7 +80,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/the-form/jest.config.ts"
       }

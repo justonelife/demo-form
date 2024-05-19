@@ -1,0 +1,1 @@
+export type LibSelectOption = { label: string, value: any };
