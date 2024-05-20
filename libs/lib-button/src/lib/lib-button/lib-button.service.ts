@@ -5,11 +5,15 @@ import { LibButtonSize, LibButtonStatus } from "./types";
 @Injectable()
 export class LibButtonService {
 
-    getClassByStatus(status: LibButtonStatus): string[] {
+    getClassesByStatus(status: LibButtonStatus): string[] {
         return STATUS_TO_KLASS[status];
     }
 
-    getClassBySize(size: LibButtonSize): string[] {
+    getClassesBySize(size: LibButtonSize): string[] {
         return SIZE_TO_KLASS[size];
+    }
+
+    getClassesByDisabledState(disabled: boolean): string[] {
+        return disabled ? ['cursor-not-allowed', 'opacity-50'] : [];
     }
 }

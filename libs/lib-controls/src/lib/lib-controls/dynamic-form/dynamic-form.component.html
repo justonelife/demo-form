@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+  <div class="grid grid-cols-12 gap-2 py-2 h-full">
+    @for (field of fieldRefs; track $index) {
+    <div class="flex flex-col" [class]="field.klass">
+      <label class="text-slate-400">{{ field.label }}</label>
+      @if (field.type !== DYNAMIC_FORM_TYPE.CUSTOM) {
+      <ng-container
+        *ngComponentOutlet="
+          field.comp | async;
+          injector: field.control | dynamicControl;
+          inputs: field?.config
+        "
+      ></ng-container>
+      } @else {
+      <ng-container
+        *ngTemplateOutlet="field.ref; context: { $implicit: field.control }"
+      ></ng-container>
+      }
+    </div>
+    }
+    <ng-container [ngTemplateOutlet]="control || defaultControl"></ng-container>
+  </div>
+</form>
+
+<ng-template #defaultControl>
+  <div class="col-span-12 flex gap-2 justify-end mt-4">
+    <button libButton 
+      status="info" 
+      type="button"
+      (click)="onReset()">
+      Reset
+    </button>
+    <button
+      libButton
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
+  </div>
+</ng-template>

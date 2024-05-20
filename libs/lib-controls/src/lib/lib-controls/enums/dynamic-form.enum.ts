@@ -1,0 +1,6 @@
+export enum DYNAMIC_FORM_TYPE {
+  TEXTAREA = 'TEXTAREA',
+  SELECT = 'SELECT',
+  RADIO = 'RADIO',
+  CUSTOM = 'CUSTOM',
+}

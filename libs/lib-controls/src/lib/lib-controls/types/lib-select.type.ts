@@ -1,1 +1,1 @@
-export type LibSelectOption = { label: string, value: any };
+export type LibSelectOption<T = any> = { label: string, value: T };

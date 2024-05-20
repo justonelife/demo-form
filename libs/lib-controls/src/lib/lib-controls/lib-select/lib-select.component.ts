@@ -1,25 +1,29 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
+import { DropdownModule } from 'primeng/dropdown';
 import { BaseSelectControl } from '../base-select-control';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { provideControlValueAccessor } from '../utils';
 
 @Component({
   selector: 'lib-select',
   templateUrl: './lib-select.component.html',
   standalone: true,
   imports: [
-    MatFormFieldModule,
-    MatSelectModule,
     FormsModule,
+    DropdownModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'p-fluid'
+  },
+  providers: [provideControlValueAccessor(LibSelectComponent)]
 })
 export class LibSelectComponent extends BaseSelectControl {
 
   @Input() override placeholder: string = 'Select';
+  
   protected override onSelect(): void {
-    
+    this.onChange(this.state);  
   }
 }
 

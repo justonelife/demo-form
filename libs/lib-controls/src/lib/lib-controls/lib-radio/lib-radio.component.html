@@ -1,0 +1,9 @@
+@for (option of validOptions(); track option) {
+<div class="flex align-items-center">
+  <p-radioButton
+    [value]="option.value"
+    [label]="option.label"
+    [(ngModel)]="state"
+  />
+</div>
+}

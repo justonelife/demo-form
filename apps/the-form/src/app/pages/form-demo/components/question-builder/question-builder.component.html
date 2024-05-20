@@ -1,0 +1,48 @@
+<form [formGroup]="questionTypeForm">
+  <lib-dynamic-form [fields]="QUESTION_TYPE_FIELDS">
+    <ng-template #control></ng-template>
+  </lib-dynamic-form>
+</form>
+
+@if (questionTypeForm.valid) {
+  <form [formGroup]="questionBuilderForm">
+    <div class="flex flex-col">
+      <label class="text-slate-400">Question</label>
+      <lib-textarea formControlName="question"
+        placeholder="Input your question">
+      </lib-textarea>
+    </div>
+    @if (questionBuilderForm.get('type')?.value === 'checkbox') {
+      <div class="flex flex-col"
+        formArrayName="answers">
+        <label class="text-slate-400">Answers</label>
+        @for (control of answers.controls; track i; let i = $index) {
+          <div class="flex gap-2 mb-2">
+            <lib-input-text [formControl]="control" class="grow"></lib-input-text>
+            <button type="button"
+              libButton
+              icon="close"
+              status="info"
+              size="small"
+              (click)="onRemoveAnswer(i)">
+            </button>
+          </div>
+        }
+
+        <a class="cursor-pointer text-blue-800 text-sm"
+          (click)="onAddAnswer()"
+          [class.!cursor-not-allowed]="answers.controls.length >= LIMIT_ANSWERS">
+          + Add another answer
+        </a>
+      </div>
+    }
+  </form>
+}
+
+<div class="flex justify-end gap-2 mt-4">
+  <button libButton type="button" status="info" (click)="dialogRef?.close()">Cancel</button>
+  <button libButton type="button"
+    [disabled]="!questionBuilderForm || questionBuilderForm.invalid">
+    Submit
+  </button>
+</div>
